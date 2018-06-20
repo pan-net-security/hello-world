@@ -15,7 +15,7 @@ FROM scratch
 
 COPY --from=0 /build/helloworld /
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["/helloworld"] 
 
