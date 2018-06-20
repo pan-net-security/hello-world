@@ -17,5 +17,7 @@ COPY --from=0 /build/helloworld /
 
 EXPOSE 8080
 
+USER 10001
+
 CMD ["/helloworld"] 
 
