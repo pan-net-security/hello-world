@@ -1,4 +1,21 @@
-FROM nginx
-RUN rm /etc/nginx/conf.d/*
-ADD hello.conf /etc/nginx/conf.d/
-ADD index.html /usr/share/nginx/html/
+FROM golang:1.10.3-alpine3.7
+
+RUN mkdir -p /go/src/helloworld
+WORKDIR /go/src/helloworld
+
+COPY main.go /go/src/helloworld
+
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+
+RUN mkdir -p /build
+RUN go build  -ldflags '-w -s' -a -installsuffix cgo -o /build/helloworld
+
+FROM scratch
+
+COPY --from=0 /build/helloworld /
+
+EXPOSE 80
+
+CMD ["/helloworld"] 
+
