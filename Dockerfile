@@ -9,7 +9,7 @@ ENV CGO_ENABLED=0
 ENV GOOS=linux
 
 RUN mkdir -p /build
-RUN go build  -ldflags '-w -s' -a -installsuffix cgo -o /build/helloworld
+RUN go build  -ldflags '-w -s' -a -o /build/helloworld
 
 FROM scratch
 
